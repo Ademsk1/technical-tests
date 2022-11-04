@@ -17,12 +17,9 @@ let distribution = ()=> {
     for (let i =0;i<distLetters.length;i++) {
         for (let letter of distLetters[i]) {
             let thisDist = Array(dist[i]).fill(letter)
-            console.log(thisDist)
             myDist = myDist.concat(thisDist)
-            console.log(myDist)
         }
     }
-    console.log(myDist)
     return myDist
 }
 
@@ -69,30 +66,36 @@ let findWordGivenLength = (rack,dict) => {
         strWord = word.split('')
         if (strWord.every((el)=>rack.includes(el.toUpperCase()))) {
         storage.push(word)
-        
+        console.log(word)
         }
-        return storage
+        
     }
+    return storage
 }
 
 
 let findBestScore = (words) =>{
     let possiblePoints = []
+    let count=0
     for (word of words) {
-        possiblePoints.push(points(words.split('')))
-        console.log(word,possiblePoints.slice(-1))
+        word = word.toUpperCase()
+        possiblePoints.push(points(word.split('')))
+        console.log(word,possiblePoints.slice(-1)[0])
+        count++
     }
+
+    
    
 }
 
 
 let main = () => {
     let bag = distribution()
-    console.log(bag.length)
     let rack = shuffle(bag)
-
+    console.log(rack)
     const dict = getDictionary()
     const possWords = findWordGivenLength(rack,dict)
+    console.log(possWords)
     findBestScore(possWords)
 }   
 //main()
