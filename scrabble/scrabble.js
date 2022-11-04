@@ -4,15 +4,18 @@ const LETTERS  = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P
 const e = Array(12).fill('E')
 
 let distribution = ()=> {
-    const myDist = []
+    let myDist = []
     const dist = [12,9,8,6,4,3,2,1]
     const distLetters = [['E'],['A','I'],['O'],['N', 'R', 'T'],['L', 'S', 'U', 'D' ],['G'],['B', 'C', 'M', 'P', 'F', 'H', 'V', 'W', 'Y'],['K', 'J', 'X', 'Q', 'Z'],]
-    for (let [numLetters,letters] of [dist,distLetters]) {
-        for (letter of letters) {
-        let thisDist = Array(numLetters).fill(letter)
-        myDist.concat(thisDist)
+    for (let i =0;i<distLetters.length;i++) {
+        for (let letter of distLetters[i]) {
+            let thisDist = Array(dist[i]).fill(letter)
+            console.log(thisDist)
+            myDist = myDist.concat(thisDist)
+            console.log(myDist)
         }
     }
+    console.log(myDist)
     return myDist
 }
 
@@ -30,9 +33,21 @@ let points = (letters) =>{
 }
 
 
-let shuffle = ()=> {
+let shuffle = (bagOfLetters)=> {
     const myLetters = []
+    let rnIndex;
     for (let i =0;i<7;i++) {
-        myLetters.push(LETTERS[Math.floor(Math.random()*26)])
+        rnIndex = Math.floor(Math.random()*bagOfLetters.length)
+        myLetters.push(bagOfLetters.splice(rnIndex,1))
     }
+    return myLetters
 }
+
+let main = () => {
+    let bag = distribution()
+    console.log(bag.length)
+    let rack = shuffle(bag)
+    console.log(rack)
+    console.log(bag.length)
+}
+main()
